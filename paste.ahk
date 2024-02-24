@@ -1,3 +1,0 @@
-::
-Send "hello"
-Return
