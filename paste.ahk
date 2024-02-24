@@ -1,2 +1,3 @@
+::
 Send "hello"
 Return

@@ -3,12 +3,12 @@ from selenium.webdriver.common.by import By
 import time
 
 driver = webdriver.Chrome()
-driver.get("https://copilot.microsoft.com/")
+driver.get("https://chat.openai.com/")
 
 driver.implicitly_wait(10)
 
-box = driver.find_element(by=By.NAME, value="searchbox")
-box.send_keys("Hello")
+box = driver.find_element(by=By.ID, value="login-button")
+box.click("Hello")
 
 #text_box.send_keys("Hello")
 # submit_button.click()
