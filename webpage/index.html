@@ -135,7 +135,36 @@
 							<header>
 								<h2>Data</h2>
 							</header>
-							
+							<!-- start of csv import-->
+							<script>
+							const fs = require("fs");
+							const readline = require("readline");
+
+							const path = "../addresses.csv";
+							const readstream = fs.createReadStream(path);
+							const readInterface = readline.createInterface({
+								input: readStream
+							});
+							const csvData = [];
+
+							readInterface.on("line", (line) => {
+								const row = line.split(",");
+								output.push(row);
+							});
+
+							readInterface.on("close", () => {
+								console.log(output);
+							});
+
+							readInterface.on("error", (err) => {
+								console.error("Error reading CSV", err);
+							});
+
+							window.alert(11);
+
+							</script>
+							<!--end of csv import -->
+
 							<html>
 							<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
 							<body>
