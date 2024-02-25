@@ -140,27 +140,25 @@
 							const fs = require("fs");
 							const readline = require("readline");
 
-							const path = "../addresses.csv";
-							const readstream = fs.createReadStream(path);
+							const path = "../database.csv";
+							const readStream = fs.createReadStream(path);
 							const readInterface = readline.createInterface({
 								input: readStream
 							});
 							const csvData = [];
-
+							
 							readInterface.on("line", (line) => {
 								const row = line.split(",");
-								output.push(row);
+								csvData.push(row);
 							});
 
 							readInterface.on("close", () => {
-								console.log(output);
+								console.log(csvData);
 							});
 
 							readInterface.on("error", (err) => {
 								console.error("Error reading CSV", err);
 							});
-
-							window.alert(11);
 
 							</script>
 							<!--end of csv import -->
