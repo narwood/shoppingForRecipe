@@ -136,29 +136,8 @@
 								<h2>Data</h2>
 							</header>
 							<!-- start of csv import-->
-							<script>
-							const fs = require("fs");
-							const readline = require("readline");
-
-							const path = "../database.csv";
-							const readStream = fs.createReadStream(path);
-							const readInterface = readline.createInterface({
-								input: readStream
-							});
-							const csvData = [];
-							
-							readInterface.on("line", (line) => {
-								const row = line.split(",");
-								csvData.push(row);
-							});
-
-							readInterface.on("close", () => {
-								console.log(csvData);
-							});
-
-							readInterface.on("error", (err) => {
-								console.error("Error reading CSV", err);
-							});
+							<script src="jquery-csv.js">
+								var data = $.csv.toObjects("../database.csv");
 
 							</script>
 							<!--end of csv import -->
