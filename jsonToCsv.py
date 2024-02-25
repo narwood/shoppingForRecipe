@@ -1,7 +1,5 @@
 import requests
 from textblob import TextBlob
-import json
-import base64
 
 URI = "https://api.nytimes.com/svc/archive/v1"
 file = "./database.csv"
@@ -20,7 +18,14 @@ def getDataForMonth(year, month):
             headline = str(article['headline']['main'])
             f.write(headline + "," + str(polarity) + "," + str(subjectivity) + "\n")
 
-        
+searchFile = 'searchDatabase.csv'
+
+def searchByParams(payload): 
+    url = "https://api.nytimes.com/svc/search/v2/articlesearch.json"
+    r = requests.get(url, params = payload)
+
+    with open(searchFile, 'w', encoding='utf-8') as f:
+        f.write(str(r.json()))
 
 if __name__ == "__main__":
-    getDataForMonth(2019, 1)
+    searchByParams({'api-key':'LfTwoHs39WAogFOzLDK9YhAJcnAHIhfn', 'fq': 'Tiger Woods AND pub_year=2009'})
