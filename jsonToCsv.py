@@ -1,8 +1,9 @@
 import requests
 from textblob import TextBlob
+import json
 
 URI = "https://api.nytimes.com/svc/archive/v1"
-file = "./database.csv"
+file = "./database.json"
 
 def getDataForMonth(year, month):
     url = URI + "/" + str(year) + "/" + str(month) + ".json"
@@ -10,13 +11,14 @@ def getDataForMonth(year, month):
     r = requests.get(url, params = payload)
 
     with open(file, 'w', encoding='utf-8') as f:
-        f.write("Headline,Polarity,Subjectivity\n")
-        for article in r.json()['response']['docs']: #somebody's got a problem with 'response' key
+        dict = {}
+        for article in r.json()['response']['docs']: 
             headlineAndAbstract = article['headline']['main'] + ". " + article['abstract']
             polarity = round(TextBlob(headlineAndAbstract).sentiment.polarity, 2)
             subjectivity = round(TextBlob(headlineAndAbstract).sentiment.subjectivity, 2)
             headline = str(article['headline']['main'])
-            f.write(headline + "," + str(polarity) + "," + str(subjectivity) + "\n")
+            dict[headline] = {'x': polarity, 'y': subjectivity}
+        json.dump(dict, f)
 
 searchFile = 'searchDatabase.csv'
 
@@ -28,4 +30,4 @@ def searchByParams(payload):
         f.write(str(r.json()))
 
 if __name__ == "__main__":
-    searchByParams({'api-key':'LfTwoHs39WAogFOzLDK9YhAJcnAHIhfn', 'fq': 'Tiger Woods AND pub_year=2009'})
+    getDataForMonth(2019, 1)

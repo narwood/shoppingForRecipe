@@ -1,27 +1,54 @@
-<script type="module">
-    const fs = require("fs");
-    const readline = require("readline");
-
-    const path = "database.csv";
-    const readStream = fs.createReadStream(path);
-    const readInterface = readline.createInterface({
-        input: readStream
-    });
-    const csvData = [];
-
-    readInterface.on("line", (line) => {
-        const row = line.split(",");
-        output.push(row);
-    });
-
-    readInterface.on("close", () => {
-        console.log(output);
-    });
-
-    readInterface.on("error", (err) => {
-        console.error("Error reading CSV", err);
-    });
-
-    window.alert(11);
-
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Sandbox</title>
+    </head>
+    <p id="1">Hello</p>
+    <script>
+        document.getElementById("1").innerHTML = "Goodbye";
     </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <body>
+        <canvas id="myChart" style="width:100%;max-width:700px"></canvas>
+        <script type="module">
+            import {xyvals, label_array} from "./sandboxIndex.js";
+
+            const xyValues = xyvals;
+
+            new Chart("myChart", {
+                type: "scatter",
+                data: {
+                    labels: label_array,
+                    datasets: [{
+                    pointRadius: 4,
+                    pointBackgroundColor: "rgb(0,0,255)",
+                    data: xyValues
+                    }]
+                },
+                options: {
+                    tooltips: {
+                        callbacks: {
+                            label: function(tooltipItem, data) {
+                            var label = data.labels[tooltipItem.index];
+                            return label + ': (' + tooltipItem.xLabel + ', ' + tooltipItem.yLabel + ')';
+                            }
+                        }
+                    },
+                    legend: {display: false},
+                    display: true,
+                    text: 'Polarity vs. Subjectivity',
+                    scales: {
+                        xAxes: [{ticks: {min: -1.0, max:1.0}}, {scaleLabel: {
+                            display: true,
+                            //labelString: 'Polarity'
+                        }}],
+                        yAxes: [{ticks: {min: 0.0, max:1.0}}, {scaleLabel: {
+                            display: true,
+                            //labelString: 'Subjectivity'
+                        }}],
+                    }
+                }
+            });
+        </script>
+    </body>
+</html>
