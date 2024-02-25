@@ -4,7 +4,7 @@ import json
 
 URI = "https://api.nytimes.com/svc/archive/v1"
 
-def main(year, month):
+def getDataForMonth(year, month):
     url = URI + "/" + str(year) + "/" + str(month) + ".json"
     payload = {'api-key':'LfTwoHs39WAogFOzLDK9YhAJcnAHIhfn'}
     r = requests.get(url, params = payload)
@@ -18,5 +18,9 @@ def main(year, month):
 
     return json.dumps(dict)
 
+def getDataForYear(year):
+    for i in range(1, 13):
+        i + 1
+
 if __name__ == "__main__":
-    main(2024, 1)
+    getDataForMonth(2024, 2)
