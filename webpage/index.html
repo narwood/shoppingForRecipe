@@ -171,8 +171,14 @@
 								display: true,
 								text: 'Polarity vs. Subjectivity',
 								scales: {
-								xAxes: [{ticks: {min: -1.0, max:1.0}}],
-								yAxes: [{ticks: {min: -1.0, max:1.0}}],
+								xAxes: [{ticks: {min: -1.0, max:1.0}}, {scaleLabel: {
+									display: true,
+									//labelString: 'Polarity'
+								}}],
+								yAxes: [{ticks: {min: 0.0, max:1.0}}, {scaleLabel: {
+									display: true,
+									//labelString: 'Subjectivity'
+								}}],
 								}
 							}
 							});
