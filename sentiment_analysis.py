@@ -1,6 +1,6 @@
 from textblob import TextBlob
 
-text = "I love pizza but I can't stand peppers"
+text = "The Pen Proves Mighty for an Unlikely Trump Correspondent. The president relishes showing off the “beautiful” and “interesting” letters he receives from a man he once threatened with annihilation: North Korea’s leader, Kim Jong-un."
 
 polarity = TextBlob(text).sentiment.polarity
 subjectivity = TextBlob(text).sentiment.subjectivity
