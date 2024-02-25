@@ -1,0 +1,14 @@
+{
+  "name": "shoppingforrecipe",
+  "version": "1.0.0",
+  "description": "Analyzes sentiment of NYT articles",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}

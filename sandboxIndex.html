@@ -10,9 +10,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
     <body>
         <canvas id="myChart" style="width:100%;max-width:700px"></canvas>
+        
         <script type="module">
-            import {xyvals, label_array} from "./sandboxIndex.js";
+            import {xyvals, label_array, getData, dict} from "./sandboxIndex.js"; 
 
+            // console.log(dict)
+            getData();
             const xyValues = xyvals;
 
             new Chart("myChart", {
