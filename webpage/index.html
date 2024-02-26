@@ -28,8 +28,8 @@
 						<nav id="nav">
 							<ul>
 								<li><a href="#top" id="top-link"><span class="icon solid fa-home">Home</span></a></li>
-								<li><a href="#portfolio" id="portfolio-link"><span class="icon solid fa-th">Info</span></a></li>
-								<li><a href="#about" id="about-link"><span class="icon solid fa-user">Data</span></a></li>
+								<li><a href="#info" id="portfolio-link"><span class="icon solid fa-th">Info</span></a></li>
+								<li><a href="#data" id="about-link"><span class="icon solid fa-user">Data</span></a></li>
 								<li><a href="#contact" id="contact-link"><span class="icon solid fa-envelope">Contact</span></a></li>
 							</ul>
 						</nav>
@@ -136,82 +136,55 @@
 								<h2>Data</h2>
 							</header>
 							<!-- start of csv import-->
-							<script>
-							function fetchJSONData() {
-							fetch("./sample.json")
-								.then((res) => {
-									if (!res.ok) {
-										throw new Error
-											(`HTTP error! Status: ${res.status}`);
-									}
-									return res.json();
-								})
-								.then((data) => 
-									console.log(data))
-								.catch((error) => 
-									console.error("Unable to fetch data:", error));
-							}
-							fetchJSONData();
-							</script>
+							<script type="module" src="./sandboxIndex.js"></script>
 							<!--end of csv import -->
 
-							<html>
 							<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
-							<body>
 							<canvas id="myChart" style="width:100%;max-width:700px"></canvas>
 
 							<script>
-							const xyValues = [
-							{x:.4, y:.7},
-							{x:-.6, y:.8},
-							{x:.1, y:-.3},
-							];
+								document.addEventListener('DOMContentLoaded', function() {
+									// Access and use the variables defined in script.js
+									console.log(titles);
+									console.log(xyvals);
+									const myValues = xyvals;
+									const myTitles = titles;
 
-							new Chart("myChart", {
-							type: "scatter",
-							data: {
-								labels: ["Label 1", "Label 2", "Label 3"],
-								datasets: [{
-								pointRadius: 4,
-								pointBackgroundColor: "rgb(0,0,255)",
-								data: xyValues
-								}]
-							},
-							options: {
-								tooltips: {
-								callbacks: {
-									label: function(tooltipItem, data) {
-									var label = data.labels[tooltipItem.index];
-									return label + ': (' + tooltipItem.xLabel + ', ' + tooltipItem.yLabel + ')';
-									}
-								}
-							},
-								legend: {display: false},
-								display: true,
-								text: 'Polarity vs. Subjectivity',
-								scales: {
-								xAxes: [{ticks: {min: -1.0, max:1.0}}, {scaleLabel: {
-									display: true,
-									//labelString: 'Polarity'
-								}}],
-								yAxes: [{ticks: {min: 0.0, max:1.0}}, {scaleLabel: {
-									display: true,
-									//labelString: 'Subjectivity'
+									new Chart("myChart", {
+										type: "scatter",
+										data: {
+											labels: ["Label 1"], 
+											datasets: [{
+												pointRadius: 4,
+												pointBackgroundColor: "rgb(0,0,255)",
+												data: myValues
+											}]
+										},
+										options: {
+											tooltips: {
+												callbacks: {
+													label: function(tooltipItem, data) {
+														var label = data.labels[tooltipItem.index];
+														return label + ': (' + tooltipItem.xLabel + ', ' + tooltipItem.yLabel + ')';
+													}
+												}
+											},
+											legend: {display: false},
+											display: true,
+											text: 'Polarity vs. Subjectivity',
+											scales: {
+												xAxes: [{scaleLabel: {
+													display: true,
+													labelString: 'Polarity'
+												}}],
+												yAxes: [{scaleLabel: {
+													display: true,
+													labelString: 'Subjectivity'
 								}}],
 								}
 							}
 							});
 							</script>
-
-							</body>
-							</html>
-
-							<p>Tincidunt eu elit diam magnis pretium accumsan etiam id urna. Ridiculus
-							ultricies curae quis et rhoncus velit. Lobortis elementum aliquet nec vitae
-							laoreet eget cubilia quam non etiam odio tincidunt montes. Elementum sem
-							parturient nulla quam placerat viverra mauris non cum elit tempus ullamcorper
-							dolor. Libero rutrum ut lacinia donec curae mus vel quisque sociis nec
-							ornare iaculis.</p>
 
 						</div>
 					</section>
